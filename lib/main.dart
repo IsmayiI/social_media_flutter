@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:social_media/pages/pages.dart';
+
+import 'navigation/navigation.dart';
+import 'theme/theme.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,14 +14,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey.shade300,
-      ),
-      routes: {
-        '/login': (_) => const LoginPage(),
-        '/register': (_) => const RegisterPage(),
-      },
-      initialRoute: '/login',
+      theme: theme,
+      routes: Navigation.routes,
+      initialRoute: Navigation.initialRoute,
     );
   }
 }
