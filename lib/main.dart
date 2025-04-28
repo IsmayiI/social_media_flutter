@@ -15,7 +15,11 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.grey.shade300,
       ),
-      home: LoginPage(),
+      routes: {
+        '/login': (_) => const LoginPage(),
+        '/register': (_) => const RegisterPage(),
+      },
+      initialRoute: '/login',
     );
   }
 }

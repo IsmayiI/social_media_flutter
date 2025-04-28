@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
-class AppButton extends StatelessWidget {
+class AuthButton extends StatelessWidget {
   final void Function() onPressed;
   final String text;
-  const AppButton({
+  const AuthButton({
     super.key,
     required this.text,
     required this.onPressed,

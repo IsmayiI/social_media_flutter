@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
-class LoginIcon extends StatelessWidget {
-  const LoginIcon({super.key});
+class AuthIcon extends StatelessWidget {
+  const AuthIcon({super.key});
 
   @override
   Widget build(BuildContext context) {

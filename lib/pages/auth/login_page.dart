@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:social_media/components/components.dart';
-import 'package:social_media/pages/login/components/components.dart';
+
+import 'components/components.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,6 +14,11 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  // метод для перехода на страницу регистрации
+  void goToRegisterPage() {
+    Navigator.pushReplacementNamed(context, '/register');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +28,12 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // иконка
-            const LoginIcon(),
+            const AuthIcon(),
 
             const SizedBox(height: 50),
 
             // текст приветсвия
-            const WelcomeText(),
+            const WelcomeText('Welcome back, you\'ve been missed!'),
 
             const SizedBox(height: 25),
 
@@ -50,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 25),
 
             // кнопка входа
-            AppButton(
+            AuthButton(
               text: 'Sign In',
               onPressed: () {},
             ),
@@ -58,10 +63,10 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 25),
 
             // переход на регистрацию
-            AppRichText(
+            AuthRichText(
               questionText: 'Don\'t have an account?',
-              text: ' Sign Up',
-              onTap: () {},
+              text: 'Register now',
+              onTap: goToRegisterPage,
             ),
           ],
         ),

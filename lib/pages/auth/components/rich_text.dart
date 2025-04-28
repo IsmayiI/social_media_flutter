@@ -2,11 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
-class AppRichText extends StatelessWidget {
+class AuthRichText extends StatelessWidget {
   final void Function() onTap;
   final String questionText;
   final String text;
-  const AppRichText({
+  const AuthRichText({
     super.key,
     required this.onTap,
     required this.questionText,
