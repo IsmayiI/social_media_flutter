@@ -5,7 +5,12 @@ import 'package:social_media/theme/colors.dart';
 
 class NewPostWrapper extends StatelessWidget {
   final TextEditingController controller;
-  const NewPostWrapper(this.controller, {super.key});
+  final VoidCallback createPost;
+  const NewPostWrapper({
+    super.key,
+    required this.controller,
+    required this.createPost,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class NewPostWrapper extends StatelessWidget {
           ),
 
           // кнопка создания поста
-          CreatePostButton(() {}),
+          CreatePostButton(createPost),
         ],
       ),
     );

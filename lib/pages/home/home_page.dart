@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media/pages/auth/utils/utils.dart';
 
 import 'components/components.dart';
+import 'utils/utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +24,11 @@ class _HomePageState extends State<HomePage> {
     await signOut(context);
   }
 
+  // метод для создания поста
+  void createPost() async {
+    await addPost(controller, user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,12 +37,16 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
-            const Text('Home Page'),
-            const SizedBox(height: 20),
-            Expanded(child: Text('User: ${user.email}')),
+            // посты
+            const Expanded(
+              child: Posts(),
+            ),
 
             // текстовое поле для создания поста
-            NewPostWrapper(controller),
+            NewPostWrapper(
+              controller: controller,
+              createPost: createPost,
+            ),
           ],
         ),
       ),
