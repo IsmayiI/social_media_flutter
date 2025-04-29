@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:social_media/navigation/route_names.dart';
 
 import 'components/components.dart';
+import 'utils/utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,12 +13,21 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // контроллеры для текстовых полей
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   // метод для перехода на страницу регистрации
   void goToRegisterPage() {
-    Navigator.pushReplacementNamed(context, '/register');
+    Navigator.pushReplacementNamed(context, RouteNames.register);
+  }
+
+  // метод для входа в аккаунт
+  void signIn(BuildContext context) async {
+    await signInWithEmailAndPassword(
+      context,
+      emailController,
+      passwordController,
+    );
   }
 
   @override
@@ -57,12 +68,12 @@ class _LoginPageState extends State<LoginPage> {
             // кнопка входа
             AuthButton(
               text: 'Sign In',
-              onPressed: () {},
+              onPressed: signIn,
             ),
 
             const SizedBox(height: 25),
 
-            // переход на регистрацию
+            // переход на страницу регистрации
             AuthRichText(
               questionText: 'Don\'t have an account?',
               text: 'Register now',
