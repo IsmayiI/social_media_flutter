@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/navigation/route_names.dart';
+import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
 import 'utils/utils.dart';
@@ -24,12 +26,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   // метод для регистрации и входа в аккаунт
   void signUp(BuildContext context) async {
-    await signUpWithEmailAndPassword(
-      context,
-      emailController,
-      passwordController,
-      confirmPasswordController,
-    );
+    await context.read<AuthProvider>().signUp(
+          context,
+          emailController,
+          passwordController,
+          confirmPasswordController,
+        );
   }
 
   @override

@@ -11,6 +11,7 @@ class NewPostWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final postController = context.read<PostsProvider>().postController;
+    final user = context.watch<AuthProvider>().user;
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -22,7 +23,7 @@ class NewPostWrapper extends StatelessWidget {
           // текстовое поле для ввода текста
           Expanded(
             child: AppTextField(
-              hintText: 'Write something',
+              hintText: 'Write something ${user.email}',
               controller: postController,
               obscureText: false,
             ),

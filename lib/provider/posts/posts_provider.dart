@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 
 class PostsProvider extends ChangeNotifier {
   final postController = TextEditingController();
-  final user = FirebaseAuth.instance.currentUser!;
 
   // метод для создания поста
-  Future<void> addPost() async {
+  Future<void> addPost(User user) async {
     // проверяем, что текстовое поле не пустое
     if (postController.text.trim().isNotEmpty) {
       // добавляем пост в Firestore

@@ -1,16 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media/provider/provider.dart';
 
-AppBar appBar(
-  User user,
-  VoidCallback logout,
-) {
+AppBar appBar(BuildContext context) {
+  // получаем пользователя
+  final user = context.watch<AuthProvider>().user;
+
+  // метод для выхода из аккаунта
+  final signOut = context.read<AuthProvider>().signOut;
+
   return AppBar(
     title: Text(user.email ?? 'User'),
     actions: [
       IconButton(
         icon: const Icon(Icons.logout),
-        onPressed: logout,
+        onPressed: () => signOut(context),
       ),
     ],
   );

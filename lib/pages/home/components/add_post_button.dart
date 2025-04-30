@@ -7,10 +7,11 @@ class AddPostButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.watch<AuthProvider>().user;
     final addPost = context.read<PostsProvider>().addPost;
 
     return IconButton(
-      onPressed: addPost,
+      onPressed: () => addPost(user),
       icon: const Icon(Icons.send),
       style: IconButton.styleFrom(
         foregroundColor: Colors.white,

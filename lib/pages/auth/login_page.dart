@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/navigation/route_names.dart';
+import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
 import 'utils/utils.dart';
@@ -23,11 +25,11 @@ class _LoginPageState extends State<LoginPage> {
 
   // метод для входа в аккаунт
   void signIn(BuildContext context) async {
-    await signInWithEmailAndPassword(
-      context,
-      emailController,
-      passwordController,
-    );
+    await context.read<AuthProvider>().signIn(
+          context,
+          emailController,
+          passwordController,
+        );
   }
 
   @override
