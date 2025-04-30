@@ -14,6 +14,9 @@ class Posts extends StatelessWidget {
           .orderBy('createdAt', descending: true)
           .snapshots(),
       builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
         final posts = snapshot.data?.docs ?? [];
         return ListView.separated(
           itemCount: posts.length,

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/components/components.dart';
-import 'package:social_media/pages/home/components/button.dart';
+import 'package:social_media/pages/home/components/add_post_button.dart';
+import 'package:social_media/provider/provider.dart';
 import 'package:social_media/theme/colors.dart';
 
 class NewPostWrapper extends StatelessWidget {
-  final TextEditingController controller;
-  final VoidCallback createPost;
-  const NewPostWrapper({
-    super.key,
-    required this.controller,
-    required this.createPost,
-  });
+  const NewPostWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final postController = context.read<PostsProvider>().postController;
+
     return DecoratedBox(
       decoration: BoxDecoration(
         color: AppColors.grey900,
@@ -25,13 +23,13 @@ class NewPostWrapper extends StatelessWidget {
           Expanded(
             child: AppTextField(
               hintText: 'Write something',
-              controller: controller,
+              controller: postController,
               obscureText: false,
             ),
           ),
 
           // кнопка создания поста
-          CreatePostButton(createPost),
+          const AddPostButton(),
         ],
       ),
     );

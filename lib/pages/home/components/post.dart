@@ -8,37 +8,52 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      tileColor: Colors.white,
 
-      // аватарка пользователя
-      leading: CircleAvatar(
-        backgroundColor: Colors.grey.shade900,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.person),
-      ),
+      // контент поста
+      child: Row(
+        children: [
+          // аватарка пользователя
+          CircleAvatar(
+            backgroundColor: Colors.grey.shade900,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.person),
+          ),
+          const SizedBox(width: 20),
 
-      // текст поста
-      title: Text(
-        post['text'],
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: AppColors.grey900,
-        ),
-      ),
+          // текст поста и имейл пользователя
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // текст поста
+                Text(
+                  post['text'],
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey900,
+                  ),
+                ),
 
-      // имейл пользователя
-      subtitle: Text(
-        post['email'],
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: AppColors.grey500,
-        ),
+                // имейл пользователя
+                Text(
+                  post['email'],
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.grey500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/firebase_options.dart';
 
 import 'navigation/navigation.dart';
+import 'provider/provider.dart';
 import 'theme/theme.dart';
 
 void main() async {
@@ -18,11 +20,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      routes: Navigation.routes,
-      initialRoute: Navigation.initialRoute,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PostsProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        routes: Navigation.routes,
+        initialRoute: Navigation.initialRoute,
+      ),
     );
   }
 }
