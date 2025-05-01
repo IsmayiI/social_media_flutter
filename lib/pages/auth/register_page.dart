@@ -1,40 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:social_media/navigation/route_names.dart';
-import 'package:social_media/provider/provider.dart';
+import 'package:social_media/navigation/routes.dart';
 
 import 'components/components.dart';
+import 'utils/utils.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
-  // контроллеры для текстовых полей
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-
-  // метод для перехода на страницу входа
-  void goToLoginPage() {
-    Navigator.pushReplacementNamed(context, RouteNames.login);
-  }
-
-  // метод для регистрации и входа в аккаунт
-  void signUp() async {
-    await context.read<AuthProvider>().signUp(
-          context,
-          emailController,
-          passwordController,
-          confirmPasswordController,
-        );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // контроллеры для текстовых полей
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+    final confirmPasswordController = TextEditingController();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -79,7 +58,12 @@ class _RegisterPageState extends State<RegisterPage> {
             // кнопка регистрации
             AuthButton(
               text: 'Sign Up',
-              onPressed: signUp,
+              onPressed: () => signUp(
+                context,
+                emailController,
+                passwordController,
+                confirmPasswordController,
+              ),
             ),
 
             const SizedBox(height: 25),
@@ -88,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
             AuthRichText(
               questionText: 'Already have an account?',
               text: 'Login now',
-              onTap: goToLoginPage,
+              onTap: () => goToLoginPage(context),
             ),
           ],
         ),

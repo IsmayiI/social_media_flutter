@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media/navigation/routes.dart';
 
 import 'components/components.dart';
 import 'utils/utils.dart';

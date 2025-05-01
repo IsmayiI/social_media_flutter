@@ -1,119 +1,50 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media/navigation/route_names.dart';
 
 class AuthProvider extends ChangeNotifier {
   User? user;
+  bool isLoading = true;
+  bool get isLoggedIn => user != null;
 
   AuthProvider() {
     // обновляем состояние при изменении пользователя
+    _listenToAuthChanges();
+  }
+
+  // метод который слушает изменения состояния аутентификации
+  // и обновляет состояние пользователя
+  void _listenToAuthChanges() {
     FirebaseAuth.instance.authStateChanges().listen((newUser) {
-      if (newUser == null) return;
       user = newUser;
+      isLoading = false;
       notifyListeners();
     });
   }
 
-  // ==================== метод для входа в аккаунт
+  // метод для входа в аккаунт
   Future<void> signIn(
-    TextEditingController email,
-    TextEditingController password,
+    String email,
+    String password,
   ) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email.text.trim(),
-        password: password.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      rethrow;
-    }
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 
-  // ==================== метод для регистрации и входа в аккаунт
+  // метод для регистрации и входа в аккаунт
   Future<void> signUp(
-    BuildContext context,
-    TextEditingController email,
-    TextEditingController password,
-    TextEditingController confirmPassword,
+    String email,
+    String password,
   ) async {
-    // сравниваем пароли
-    if (password.text.trim() != confirmPassword.text.trim()) {
-      // если пароли не совпадают, показываем SnackBar с сообщением
-      showSnackBar(context, 'Passwords do not match');
-      return;
-    }
-
-    // показываем диалог загрузки
-    showProgressIndicator(context);
-
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email.text.trim(),
-        password: password.text.trim(),
-      );
-
-      // закрываем диалог загрузки
-      if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        // закрываем диалог загрузки
-        Navigator.pop(context);
-
-        // если произошла ошибка, показываем snackBar с сообщением
-        showSnackBar(context, e.message);
-      }
-      return;
-    }
-
-    // если вход успешен, переходим на главную страницу
-    if (context.mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.auth);
-    }
-  }
-
-  // ==================== метод для выхода из аккаунта
-  Future<void> signOut(BuildContext context) async {
-    // показываем диалог загрузки
-    showProgressIndicator(context);
-
-    try {
-      await FirebaseAuth.instance.signOut();
-
-      // закрываем диалог загрузки
-      if (context.mounted) Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        // закрываем диалог загрузки
-        Navigator.pop(context);
-
-        // если произошла ошибка, показываем snackBar с сообщением
-        showSnackBar(context, e.message);
-      }
-      return;
-    }
-
-    // если выход успешен, переходим на главную страницу
-    if (context.mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.auth);
-    }
-  }
-
-  // ==================== показать SnackBar с сообщением об ошибке
-  void showSnackBar(BuildContext context, String? message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message ?? 'An error occurred'),
-      ),
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
     );
   }
 
-  // ==================== показать диалог загрузки
-  void showProgressIndicator(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
+  // метод для выхода из аккаунта
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
