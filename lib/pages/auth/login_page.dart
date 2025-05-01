@@ -1,38 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:social_media/navigation/route_names.dart';
-import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
+import 'utils/utils.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  // контроллеры для текстовых полей
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  // метод для перехода на страницу регистрации
-  void goToRegisterPage() {
-    Navigator.pushReplacementNamed(context, RouteNames.register);
-  }
-
-  // метод для входа в аккаунт
-  void signIn() async {
-    await context.read<AuthProvider>().signIn(
-          context,
-          emailController,
-          passwordController,
-        );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // контроллеры для текстовых полей
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -69,7 +48,11 @@ class _LoginPageState extends State<LoginPage> {
             // кнопка входа
             AuthButton(
               text: 'Sign In',
-              onPressed: signIn,
+              onPressed: () => signIn(
+                context,
+                emailController,
+                passwordController,
+              ),
             ),
 
             const SizedBox(height: 25),
@@ -78,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             AuthRichText(
               questionText: 'Don\'t have an account?',
               text: 'Register now',
-              onTap: goToRegisterPage,
+              onTap: () => goToRegisterPage(context),
             ),
           ],
         ),

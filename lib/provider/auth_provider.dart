@@ -15,33 +15,17 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // ==================== метод для входа в аккаунт
-  Future<void> signIn(BuildContext context, TextEditingController email,
-      TextEditingController password) async {
-    // показываем диалог загрузки
-    showProgressIndicator(context);
-
+  Future<void> signIn(
+    TextEditingController email,
+    TextEditingController password,
+  ) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email.text.trim(),
         password: password.text.trim(),
       );
-
-      // закрываем диалог загрузки
-      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (context.mounted) {
-        // закрываем диалог загрузки
-        Navigator.pop(context);
-
-        // если произошла ошибка, показываем snackBar с сообщением
-        showSnackBar(context, e.message);
-      }
-      return;
-    }
-
-    // если вход успешен, переходим на главную страницу
-    if (context.mounted) {
-      Navigator.pushReplacementNamed(context, RouteNames.auth);
+      rethrow;
     }
   }
 

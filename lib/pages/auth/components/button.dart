@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
 class AuthButton extends StatelessWidget {
-  final void Function() onPressed;
+  final VoidCallback onPressed;
   final String text;
   const AuthButton({
     super.key,

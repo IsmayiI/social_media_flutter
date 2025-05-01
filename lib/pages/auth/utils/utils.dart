@@ -1,6 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/navigation/route_names.dart';
+import 'package:social_media/provider/provider.dart' as auth_provider;
+
+// метод для перехода на страницу регистрации
+void goToRegisterPage(BuildContext context) {
+  Navigator.pushReplacementNamed(context, RouteNames.register);
+}
 
 // показать SnackBar с сообщением об ошибке
 void showSnackBar(BuildContext context, String? message) {
@@ -22,16 +29,19 @@ void showProgressIndicator(BuildContext context) {
 }
 
 // ==================== метод для входа в аккаунт
-Future<void> signInWithEmailAndPassword(BuildContext context,
-    TextEditingController email, TextEditingController password) async {
+Future<void> signIn(
+  BuildContext context,
+  TextEditingController email,
+  TextEditingController password,
+) async {
   // показываем диалог загрузки
   showProgressIndicator(context);
 
   try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email.text.trim(),
-      password: password.text.trim(),
-    );
+    await context.read<auth_provider.AuthProvider>().signIn(
+          email,
+          password,
+        );
 
     // закрываем диалог загрузки
     if (context.mounted) Navigator.pop(context);

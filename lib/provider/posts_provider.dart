@@ -6,14 +6,14 @@ class PostsProvider extends ChangeNotifier {
   final postController = TextEditingController();
 
   // метод для создания поста
-  Future<void> addPost(User user) async {
+  Future<void> addPost(User? user) async {
     // проверяем, что текстовое поле не пустое
     if (postController.text.trim().isNotEmpty) {
       // добавляем пост в Firestore
       await FirebaseFirestore.instance.collection('posts').add({
         'text': postController.text.trim(),
         'createdAt': Timestamp.now(),
-        'email': user.email,
+        'email': user?.email ?? 'Anonymous',
       });
 
       // очищаем текстовое поле
