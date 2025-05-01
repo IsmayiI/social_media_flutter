@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:social_media/pages/home/utils/utils.dart';
 import 'package:social_media/provider/provider.dart';
 
 class AddPostButton extends StatelessWidget {
@@ -7,11 +8,11 @@ class AddPostButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // текущий пользователь
     final user = context.watch<AuthProvider>().user;
-    final addPost = context.read<PostsProvider>().addPost;
 
     return IconButton(
-      onPressed: () => addPost(user),
+      onPressed: () => addPost(context, user?.email),
       icon: const Icon(Icons.send),
       style: IconButton.styleFrom(
         foregroundColor: Colors.white,

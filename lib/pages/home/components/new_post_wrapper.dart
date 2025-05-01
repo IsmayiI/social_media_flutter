@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/components/components.dart';
-import 'package:social_media/pages/home/components/add_post_button.dart';
 import 'package:social_media/provider/provider.dart';
 import 'package:social_media/theme/colors.dart';
+
+import 'components.dart';
 
 class NewPostWrapper extends StatelessWidget {
   const NewPostWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // контроллер для текстового поля
     final postController = context.read<PostsProvider>().postController;
+
+    // текущий пользователь
     final user = context.watch<AuthProvider>().user;
 
     return DecoratedBox(

@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PostsProvider extends ChangeNotifier {
+  // контроллер для текстового поля
   final postController = TextEditingController();
 
   // метод для создания поста
-  Future<void> addPost(User? user) async {
+  Future<void> addPost(String email) async {
     // проверяем, что текстовое поле не пустое
-    if (postController.text.trim().isNotEmpty) {
-      // добавляем пост в Firestore
-      await FirebaseFirestore.instance.collection('posts').add({
-        'text': postController.text.trim(),
-        'createdAt': Timestamp.now(),
-        'email': user?.email ?? 'Anonymous',
-      });
+    if (postController.text.isEmpty) return;
 
-      // очищаем текстовое поле
-      postController.clear();
-    }
+    // добавляем пост в Firestore
+    await FirebaseFirestore.instance.collection('posts').add({
+      'text': postController.text.trim(),
+      'createdAt': Timestamp.now(),
+      'email': email,
+    });
+
+    // очищаем текстовое поле
+    postController.clear();
   }
 }
