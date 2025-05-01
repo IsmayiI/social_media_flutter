@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -5,6 +7,7 @@ class AuthProvider extends ChangeNotifier {
   User? user;
   bool isLoading = true;
   bool get isLoggedIn => user != null;
+  late final StreamSubscription _subscription;
 
   AuthProvider() {
     // обновляем состояние при изменении пользователя
@@ -14,7 +17,7 @@ class AuthProvider extends ChangeNotifier {
   // метод который слушает изменения состояния аутентификации
   // и обновляет состояние пользователя
   void _listenToAuthChanges() {
-    FirebaseAuth.instance.authStateChanges().listen((newUser) {
+    _subscription = FirebaseAuth.instance.authStateChanges().listen((newUser) {
       user = newUser;
       isLoading = false;
       notifyListeners();
@@ -46,5 +49,12 @@ class AuthProvider extends ChangeNotifier {
   // метод для выхода из аккаунта
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
+  }
+
+  @override
+  void dispose() {
+    // отписываемся от обновлений аутентификации
+    _subscription.cancel();
+    super.dispose();
   }
 }

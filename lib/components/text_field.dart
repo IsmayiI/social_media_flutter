@@ -4,11 +4,13 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool obscureText;
+  final void Function(String)? onSubmitted;
   const AppTextField({
     super.key,
     required this.hintText,
     required this.controller,
     required this.obscureText,
+    this.onSubmitted,
   });
 
   @override
@@ -34,6 +36,8 @@ class AppTextField extends StatelessWidget {
         focusedBorder: border,
       ),
       obscureText: obscureText,
+      textInputAction: TextInputAction.send,
+      onSubmitted: onSubmitted,
     );
   }
 }

@@ -1,9 +1,31 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PostsProvider extends ChangeNotifier {
   // контроллер для текстового поля
   final postController = TextEditingController();
+
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> posts = [];
+  late final StreamSubscription _subscription;
+
+  PostsProvider() {
+    // обновляем состояние при изменении постов
+    _listenToPostsChanges();
+  }
+
+  // метод для получения постов из Firestore
+  void _listenToPostsChanges() {
+    _subscription = FirebaseFirestore.instance
+        .collection('posts')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .listen((snapshot) {
+      posts = snapshot.docs;
+      notifyListeners();
+    });
+  }
 
   // метод для создания поста
   Future<void> addPost(String email) async {
@@ -19,5 +41,14 @@ class PostsProvider extends ChangeNotifier {
 
     // очищаем текстовое поле
     postController.clear();
+  }
+
+  @override
+  void dispose() {
+    // отписываемся от обновлений Firestore
+    _subscription.cancel();
+    // очищаем контроллер
+    postController.dispose();
+    super.dispose();
   }
 }

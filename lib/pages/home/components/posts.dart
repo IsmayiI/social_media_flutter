@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media/provider/provider.dart';
 
 import 'components.dart';
 
@@ -8,30 +9,26 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance
-          .collection('posts')
-          .orderBy('createdAt', descending: true)
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final posts = snapshot.data?.docs ?? [];
-        return ListView.separated(
-          itemCount: posts.length,
+    // получаем список постов из провайдера
+    final posts = context.watch<PostsProvider>().posts;
 
-          // список постов
-          itemBuilder: (context, index) {
-            final post = posts[index];
-            return Post(post);
-          },
+    // если список постов пустой, показываем индикатор загрузки
+    if (posts.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-          // отступ между постами
-          separatorBuilder: (context, index) {
-            return const SizedBox(height: 10);
-          },
-        );
+    return ListView.separated(
+      itemCount: posts.length,
+
+      // список постов
+      itemBuilder: (context, index) {
+        final post = posts[index];
+        return Post(post);
+      },
+
+      // отступ между постами
+      separatorBuilder: (context, index) {
+        return const SizedBox(height: 10);
       },
     );
   }
