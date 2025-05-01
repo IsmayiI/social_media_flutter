@@ -11,7 +11,7 @@ class NewPostWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final postController = context.read<PostsProvider>().postController;
-    final user = context.watch<AuthProvider>().user;
+    final user = context.watch<AuthProvider>().user!;
 
     return DecoratedBox(
       decoration: BoxDecoration(

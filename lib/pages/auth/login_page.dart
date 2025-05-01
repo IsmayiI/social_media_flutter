@@ -4,7 +4,6 @@ import 'package:social_media/navigation/route_names.dart';
 import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
-import 'utils/utils.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -24,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // метод для входа в аккаунт
-  void signIn(BuildContext context) async {
+  void signIn() async {
     await context.read<AuthProvider>().signIn(
           context,
           emailController,

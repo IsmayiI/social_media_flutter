@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
 class AuthButton extends StatelessWidget {
-  final void Function(BuildContext) onPressed;
+  final void Function() onPressed;
   final String text;
   const AuthButton({
     super.key,
@@ -13,7 +13,7 @@ class AuthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => onPressed(context),
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 56),
         backgroundColor: AppColors.grey900,

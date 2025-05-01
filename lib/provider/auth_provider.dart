@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media/navigation/route_names.dart';
 
 class AuthProvider extends ChangeNotifier {
-  User user = FirebaseAuth.instance.currentUser!;
+  User? user;
 
   AuthProvider() {
     // обновляем состояние при изменении пользователя

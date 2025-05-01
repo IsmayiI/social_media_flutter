@@ -4,7 +4,6 @@ import 'package:social_media/navigation/route_names.dart';
 import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
-import 'utils/utils.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -25,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   // метод для регистрации и входа в аккаунт
-  void signUp(BuildContext context) async {
+  void signUp() async {
     await context.read<AuthProvider>().signUp(
           context,
           emailController,
