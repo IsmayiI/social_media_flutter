@@ -8,4 +8,7 @@ Future<void> addPost(
   String? email,
 ) async {
   await context.read<PostsProvider>().addPost(email ?? 'Anonymous');
+
+  // убираем клавиатуру
+  if (context.mounted) FocusScope.of(context).unfocus();
 }

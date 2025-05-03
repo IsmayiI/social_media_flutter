@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:social_media/theme/colors.dart';
 
+import 'components.dart';
+
 class Post extends StatelessWidget {
   final QueryDocumentSnapshot<Map<String, dynamic>> post;
   const Post(this.post, {super.key});
@@ -18,13 +20,10 @@ class Post extends StatelessWidget {
       // контент поста
       child: Row(
         children: [
-          // аватарка пользователя
-          CircleAvatar(
-            backgroundColor: Colors.grey.shade900,
-            foregroundColor: Colors.white,
-            child: const Icon(Icons.person),
-          ),
-          const SizedBox(width: 20),
+          // кнопка "лайк" и количество лайков
+          LikeButton(post),
+
+          const SizedBox(width: 10),
 
           // текст поста и имейл пользователя
           Expanded(

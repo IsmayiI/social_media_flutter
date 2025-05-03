@@ -27,6 +27,11 @@ Future<void> signOut(BuildContext context) async {
     return;
   }
 
-  // если вход успешен, переходим на страницу авторизации которая перенаправит на главную страницу
-  if (context.mounted) goToAuthPage(context);
+  if (context.mounted) {
+    // убираем клавиатуру
+    FocusScope.of(context).unfocus();
+
+    // если вход успешен, переходим на страницу авторизации которая перенаправит на главную страницу
+    goToAuthPage(context);
+  }
 }

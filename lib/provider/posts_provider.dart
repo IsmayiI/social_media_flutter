@@ -7,6 +7,7 @@ class PostsProvider extends ChangeNotifier {
   // контроллер для текстового поля
   final postController = TextEditingController();
 
+  // список постов
   List<QueryDocumentSnapshot<Map<String, dynamic>>> posts = [];
   late final StreamSubscription _subscription;
 
@@ -27,6 +28,16 @@ class PostsProvider extends ChangeNotifier {
     });
   }
 
+  // метод для обновления количества лайков
+  Future<void> updateLikes(
+    List<String> likes,
+    DocumentReference<Map<String, dynamic>> postRef,
+  ) async {
+    await postRef.update({
+      'likes': likes,
+    });
+  }
+
   // метод для создания поста
   Future<void> addPost(String email) async {
     // проверяем, что текстовое поле не пустое
@@ -37,6 +48,7 @@ class PostsProvider extends ChangeNotifier {
       'text': postController.text.trim(),
       'createdAt': Timestamp.now(),
       'email': email,
+      'likes': [],
     });
 
     // очищаем текстовое поле

@@ -14,7 +14,7 @@ class Posts extends StatelessWidget {
 
     // если список постов пустой, показываем индикатор загрузки
     if (posts.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: Text('Posts are empty'));
     }
 
     return ListView.separated(

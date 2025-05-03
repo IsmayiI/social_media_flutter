@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/components/components.dart';
-import 'package:social_media/pages/home/utils/utils.dart';
 import 'package:social_media/provider/provider.dart';
 import 'package:social_media/theme/colors.dart';
 
@@ -15,9 +14,6 @@ class NewPostWrapper extends StatelessWidget {
     // контроллер для текстового поля
     final postController = context.read<PostsProvider>().postController;
 
-    // получаем email пользователя
-    final email = context.read<AuthProvider>().user?.email;
-
     return DecoratedBox(
       decoration: BoxDecoration(
         color: AppColors.grey900,
@@ -30,8 +26,8 @@ class NewPostWrapper extends StatelessWidget {
             child: AppTextField(
               hintText: 'Write something...',
               controller: postController,
-              obscureText: false,
-              onSubmitted: (_) => addPost(context, email),
+              textInputAction: TextInputAction.newline,
+              maxLines: null,
             ),
           ),
 

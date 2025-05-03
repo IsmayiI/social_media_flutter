@@ -4,13 +4,17 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool obscureText;
-  final void Function(String)? onSubmitted;
+  final TextInputAction textInputAction;
+  final int? maxLines;
+  final TextInputType? keyboardType;
   const AppTextField({
     super.key,
     required this.hintText,
     required this.controller,
-    required this.obscureText,
-    this.onSubmitted,
+    this.keyboardType,
+    this.maxLines = 1,
+    this.obscureText = false,
+    this.textInputAction = TextInputAction.next,
   });
 
   @override
@@ -36,8 +40,9 @@ class AppTextField extends StatelessWidget {
         focusedBorder: border,
       ),
       obscureText: obscureText,
-      textInputAction: TextInputAction.send,
-      onSubmitted: onSubmitted,
+      textInputAction: textInputAction,
+      keyboardType: keyboardType,
+      maxLines: maxLines,
     );
   }
 }
