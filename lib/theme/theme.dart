@@ -9,4 +9,7 @@ final theme = ThemeData(
     foregroundColor: Colors.white,
     centerTitle: true,
   ),
+  drawerTheme: const DrawerThemeData(
+    backgroundColor: AppColors.grey300,
+  ),
 );

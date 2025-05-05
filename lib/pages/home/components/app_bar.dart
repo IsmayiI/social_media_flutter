@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:social_media/pages/auth/utils/utils.dart';
 import 'package:social_media/provider/provider.dart';
 
 AppBar appBar(BuildContext context) {
@@ -9,11 +8,5 @@ AppBar appBar(BuildContext context) {
 
   return AppBar(
     title: Text(user?.email ?? 'User'),
-    actions: [
-      IconButton(
-        icon: const Icon(Icons.logout),
-        onPressed: () => signOut(context),
-      ),
-    ],
   );
 }
