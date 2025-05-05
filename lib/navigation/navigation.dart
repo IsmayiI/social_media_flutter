@@ -17,5 +17,8 @@ abstract class Navigation {
 
     // регистрация
     RouteNames.register: (_) => const RegisterPage(),
+
+    // профиль
+    RouteNames.profile: (_) => const ProfilePage(),
   };
 }

@@ -16,3 +16,8 @@ void goToRegisterPage(BuildContext context) {
 void goToAuthPage(BuildContext context) {
   Navigator.pushReplacementNamed(context, RouteNames.auth);
 }
+
+// метод для перехода на страницу профиля
+void goToProfilePage(BuildContext context) {
+  Navigator.pushNamed(context, RouteNames.profile);
+}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:social_media/navigation/routes.dart';
 import 'package:social_media/pages/auth/utils/utils.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -34,7 +35,7 @@ class MyDrawer extends StatelessWidget {
             _DrawerTile(
               const Icon(Icons.person),
               'Profile',
-              () => Navigator.pop(context),
+              () => goToProfilePage(context),
             ),
 
             // пространство между элементами
