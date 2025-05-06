@@ -42,7 +42,7 @@ class Post extends StatelessWidget {
 
                 // имейл пользователя
                 Text(
-                  post['email'],
+                  post['name'],
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

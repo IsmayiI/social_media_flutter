@@ -4,9 +4,11 @@ import 'package:social_media/provider/provider.dart';
 
 AppBar appBar(BuildContext context) {
   // получаем пользователя
-  final user = context.watch<AuthProvider>().user;
+  final user = context.watch<UserProvider>().user;
+
+  final name = user?['name'] ?? 'User';
 
   return AppBar(
-    title: Text(user?.email ?? 'User'),
+    title: Text('$name\'s feed'),
   );
 }

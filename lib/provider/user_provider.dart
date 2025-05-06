@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +8,11 @@ import 'provider.dart';
 class UserProvider extends ChangeNotifier {
   String? uid;
   Map<String, dynamic>? user;
+  late final StreamSubscription _subscription;
 
   // слушаем данные пользователя из Firestore
   void _listenToUserChanges() {
-    FirebaseFirestore.instance
+    _subscription = FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
         .snapshots()
@@ -43,5 +46,11 @@ class UserProvider extends ChangeNotifier {
         .collection('users')
         .doc(uid)
         .update({'bio': bio});
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 }

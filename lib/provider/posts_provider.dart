@@ -39,7 +39,7 @@ class PostsProvider extends ChangeNotifier {
   }
 
   // метод для создания поста
-  Future<void> addPost(String email) async {
+  Future<void> addPost(String name) async {
     // проверяем, что текстовое поле не пустое
     if (postController.text.isEmpty) return;
 
@@ -47,7 +47,7 @@ class PostsProvider extends ChangeNotifier {
     await FirebaseFirestore.instance.collection('posts').add({
       'text': postController.text.trim(),
       'createdAt': Timestamp.now(),
-      'email': email,
+      'name': name,
       'likes': [],
     });
 
