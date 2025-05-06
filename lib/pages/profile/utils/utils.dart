@@ -1,10 +1,21 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media/provider/provider.dart';
 
-// Future<Map<String, dynamic>?> getUserDetails(String uid) async {
-//   final userSnapshot = await FirebaseFirestore.instance
-//       .collection('users')
-//       .doc(uid) // Replace with the actual user ID
-//       .get();
-//   final user = userSnapshot.data();
-//   return user;
-// }
+// закрытие диалога
+void closeDialog(BuildContext context, TextEditingController controller) {
+  Navigator.pop(context);
+  controller.clear();
+}
+
+// обновить имя
+void updateName(BuildContext context, TextEditingController controller) {
+  context.read<UserProvider>().updateName(controller.text.trim());
+  closeDialog(context, controller);
+}
+
+// обновить био
+void updateBio(BuildContext context, TextEditingController controller) {
+  context.read<UserProvider>().updateBio(controller.text.trim());
+  closeDialog(context, controller);
+}

@@ -9,9 +9,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<AuthProvider>().user;
-
-    final userDetail = context.watch<UserProvider>().user;
+    // получаем email пользователя
+    final email =
+        context.watch<AuthProvider>().user?.email ?? 'email not found';
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +33,7 @@ class ProfilePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Text(
-                  user?.email ?? 'email not found',
+                  email,
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -50,18 +50,12 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 10),
 
               // имя
-              DetailCard(
-                title: 'username',
-                value: userDetail?['name'] ?? 'empty..',
-              ),
+              DetailCard('name'),
 
               const SizedBox(height: 20),
 
-              // bio
-              DetailCard(
-                title: 'bio',
-                value: userDetail?['bio'] ?? 'empty..',
-              ),
+              // био
+              DetailCard('bio'),
             ],
           ),
         ),

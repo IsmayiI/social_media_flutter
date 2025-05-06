@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:social_media/components/components.dart';
 import 'package:social_media/provider/provider.dart';
 import 'package:social_media/theme/colors.dart';
 
@@ -8,16 +7,14 @@ import 'components.dart';
 
 class DetailCard extends StatelessWidget {
   final String title;
-  final String value;
-  const DetailCard({
-    super.key,
-    required this.title,
-    required this.value,
-  });
+  const DetailCard(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = context.read<UserProvider>().controller;
+    final user = context.watch<UserProvider>().user;
+
+    // получаем значение name или bio в зависимости от title
+    final value = user?[title] ?? 'empty..';
 
     return Container(
       padding: const EdgeInsets.all(14),
@@ -25,6 +22,7 @@ class DetailCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
+
       // контент
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,8 +54,7 @@ class DetailCard extends StatelessWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (_) =>
-                    SettingsDialog(title: title, controller: controller),
+                builder: (_) => SettingsDialog(title),
               );
             },
           ),

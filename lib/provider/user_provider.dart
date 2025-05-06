@@ -4,24 +4,44 @@ import 'package:flutter/material.dart';
 import 'provider.dart';
 
 class UserProvider extends ChangeNotifier {
-  final controller = TextEditingController();
+  String? uid;
   Map<String, dynamic>? user;
 
+  // слушаем данные пользователя из Firestore
+  void _listenToUserChanges() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .listen((snapshot) {
+      user = snapshot.data();
+      notifyListeners();
+    });
+  }
+
+  // вызывается при изменении состояния аутентификации
   void updateWithAuth(AuthProvider authProvider) {
     final currentUser = authProvider.user;
     if (currentUser != null) {
-      _getUserDetails(currentUser.uid);
+      uid = currentUser.uid;
+      notifyListeners();
+      _listenToUserChanges();
     }
   }
 
-  void _getUserDetails(String uid) async {
-    final userSnapshot =
-        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  // обновление имени пользователя
+  void updateName(String name) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'name': name});
+  }
 
-    final userData = userSnapshot.data();
-    if (userData != null) {
-      user = userData;
-      notifyListeners();
-    }
+  // обновление биографии
+  void updateBio(String bio) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({'bio': bio});
   }
 }
