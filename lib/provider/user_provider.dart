@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'provider.dart';
 
 class UserProvider extends ChangeNotifier {
+  final controller = TextEditingController();
   Map<String, dynamic>? user;
 
   void updateWithAuth(AuthProvider authProvider) {
