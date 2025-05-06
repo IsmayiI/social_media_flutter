@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -40,10 +41,22 @@ class AuthProvider extends ChangeNotifier {
     String email,
     String password,
   ) async {
+    // регистрация пользователя в Firebase
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+
+    final user = FirebaseAuth.instance.currentUser!;
+
+    // получаем имя пользователя из email
+    final username = user.email?.split('@')[0] ?? 'username';
+
+    // добавление пользователя в Firestore
+    await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      'name': username,
+      'bio': 'empty bio..',
+    });
   }
 
   // метод для выхода из аккаунта

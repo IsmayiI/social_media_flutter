@@ -15,7 +15,7 @@ class MyDrawer extends StatelessWidget {
         // контент
         child: Column(
           children: [
-            // logo
+            // лого
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
               child: Icon(
@@ -24,14 +24,14 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
 
-            // Дом
+            // дом
             _DrawerTile(
               const Icon(Icons.home),
               'Home',
               () => Navigator.pop(context),
             ),
 
-            // Профиль
+            // профиль
             _DrawerTile(
               const Icon(Icons.person),
               'Profile',
@@ -41,7 +41,7 @@ class MyDrawer extends StatelessWidget {
             // пространство между элементами
             const Spacer(),
 
-            // Выход
+            // выход
             _DrawerTile(
               const Icon(Icons.logout),
               'Logout',

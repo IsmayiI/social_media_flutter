@@ -24,6 +24,11 @@ class MainApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => PostsProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
+          create: (_) => UserProvider(),
+          update: (_, authProvider, userProvider) =>
+              userProvider!..updateWithAuth(authProvider),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
