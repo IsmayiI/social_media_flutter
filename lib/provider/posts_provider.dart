@@ -9,6 +9,8 @@ class PostsProvider extends ChangeNotifier {
 
   // список постов
   List<QueryDocumentSnapshot<Map<String, dynamic>>> posts = [];
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> userPosts = [];
+
   late final StreamSubscription _subscription;
 
   PostsProvider() {
@@ -28,6 +30,18 @@ class PostsProvider extends ChangeNotifier {
     });
   }
 
+  // метод для получение постов конкретного пользователя
+  Future<void> getUserPosts(String uid) async {
+    final postsSnapshot = await FirebaseFirestore.instance
+        .collection('posts')
+        .where('uid', isEqualTo: uid)
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    userPosts = postsSnapshot.docs;
+    notifyListeners();
+  }
+
   // метод для обновления количества лайков
   Future<void> updateLikes(
     List<String> likes,
@@ -39,12 +53,13 @@ class PostsProvider extends ChangeNotifier {
   }
 
   // метод для создания поста
-  Future<void> addPost(String name) async {
+  Future<void> addPost(String name, String uid) async {
     // проверяем, что текстовое поле не пустое
     if (postController.text.isEmpty) return;
 
     // добавляем пост в Firestore
     await FirebaseFirestore.instance.collection('posts').add({
+      'uid': uid,
       'text': postController.text.trim(),
       'createdAt': Timestamp.now(),
       'name': name,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/components/drawer.dart';
+import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
 
@@ -8,6 +10,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // получаем список постов из провайдера
+    final posts = context.watch<PostsProvider>().posts;
+
     return Scaffold(
       appBar: appBar(context),
       drawer: MyDrawer(),
@@ -16,7 +21,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           children: [
             // посты
-            Expanded(child: Posts()),
+            Expanded(child: Posts(posts)),
 
             SizedBox(height: 20),
 

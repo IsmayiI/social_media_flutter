@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/navigation/routes.dart';
 import 'package:social_media/pages/auth/utils/utils.dart';
+import 'package:social_media/provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // логика получения постов конкретного пользователя при клике на "Profile"
+    final getUserPosts = context.read<PostsProvider>().getUserPosts;
+    final uid = context.read<AuthProvider>().user?.uid;
+
     return Drawer(
       child: Padding(
         // отступы
@@ -35,7 +41,10 @@ class MyDrawer extends StatelessWidget {
             _DrawerTile(
               const Icon(Icons.person),
               'Profile',
-              () => goToProfilePage(context),
+              () {
+                if (uid != null) getUserPosts(uid);
+                goToProfilePage(context);
+              },
             ),
 
             // пространство между элементами

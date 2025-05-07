@@ -8,7 +8,7 @@ import 'provider.dart';
 class UserProvider extends ChangeNotifier {
   String? uid;
   Map<String, dynamic>? user;
-  late final StreamSubscription _subscription;
+  StreamSubscription? _subscription;
 
   // слушаем данные пользователя из Firestore
   void _listenToUserChanges() {
@@ -50,7 +50,7 @@ class UserProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    _subscription.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }

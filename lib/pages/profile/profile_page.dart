@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:social_media/pages/home/components/components.dart';
 import 'package:social_media/provider/provider.dart';
 
 import 'components/components.dart';
@@ -12,6 +13,8 @@ class ProfilePage extends StatelessWidget {
     // получаем email пользователя
     final email =
         context.watch<AuthProvider>().user?.email ?? 'email not found';
+
+    final userPosts = context.watch<PostsProvider>().userPosts;
 
     return Scaffold(
       appBar: AppBar(
@@ -56,6 +59,29 @@ class ProfilePage extends StatelessWidget {
 
               // био
               DetailCard('bio'),
+
+              const SizedBox(height: 20),
+
+              // посты
+              Align(
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'Posts',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              Expanded(child: Posts(userPosts)),
+
+              // посты пользователя
+              // ListView.builder(
+              //   itemCount: 10,
+              //   itemBuilder: (context, index) {
+              //     return  Post();
+              //   },
+              // ),
             ],
           ),
         ),

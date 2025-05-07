@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:social_media/provider/provider.dart';
 
 // функция для переключения лайка
-void toggleLike(
+Future<void> toggleLike(
   BuildContext context,
   String postId,
-  String? email,
+  String? uid,
 ) async {
   // получаем ссылку на пост
   final postRef = FirebaseFirestore.instance.collection('posts').doc(postId);
@@ -15,16 +15,16 @@ void toggleLike(
   // получаем текущие данные поста
   final post = await postRef.get();
 
-  // проверяем, существует ли пост и есть ли email пользователя
+  // проверяем, существует ли пост и есть ли uid пользователя
   if (!post.exists) return;
-  if (email == null) return;
+  if (uid == null) return;
 
   // получаем список лайков
   final likes = List<String>.from(post['likes']);
 
   // проверяем, есть ли уже лайк от текущего пользователя
   // если лайк уже есть, удаляем его, иначе добавляем
-  likes.contains(email) ? likes.remove(email) : likes.add(email);
+  likes.contains(uid) ? likes.remove(uid) : likes.add(uid);
 
   // обновляем количество лайков
   if (context.mounted) {
