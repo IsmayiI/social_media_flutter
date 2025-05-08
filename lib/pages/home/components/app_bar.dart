@@ -8,7 +8,5 @@ AppBar appBar(BuildContext context) {
 
   final name = user?['name'] ?? 'User';
 
-  return AppBar(
-    title: Text('$name\'s feed'),
-  );
+  return AppBar(title: Text('$name\'s feed'));
 }

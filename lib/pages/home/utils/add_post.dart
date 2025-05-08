@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/provider/provider.dart';
+import 'package:social_media/utils/unfocus_textfield.dart';
 
 // метод для создания поста
 Future<void> addPost(BuildContext context) async {
@@ -10,5 +11,7 @@ Future<void> addPost(BuildContext context) async {
   await context.read<PostsProvider>().addPost(name, uid);
 
   // убираем клавиатуру
-  if (context.mounted) FocusScope.of(context).unfocus();
+  if (context.mounted) {
+    unfocusTextField(context);
+  }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/navigation/routes.dart';
 import 'package:social_media/provider/provider.dart' as provider;
+import 'package:social_media/utils/unfocus_textfield.dart';
 
 import 'utils.dart';
 
@@ -19,6 +20,9 @@ Future<void> signUp(
     showSnackBar(context, 'Passwords do not match');
     return;
   }
+
+  // убираем клавиатуру
+  unfocusTextField(context);
 
   // показываем диалог загрузки
   showProgressIndicator(context);
@@ -42,11 +46,6 @@ Future<void> signUp(
     return;
   }
 
-  if (context.mounted) {
-    // убираем клавиатуру
-    FocusScope.of(context).unfocus();
-
-    // если вход успешен, переходим на страницу авторизации которая перенаправит на главную страницу
-    goToAuthPage(context);
-  }
+  // если вход успешен, переходим на страницу авторизации которая перенаправит на главную страницу
+  if (context.mounted) goToAuthPage(context);
 }

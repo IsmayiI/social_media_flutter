@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/components/drawer.dart';
 import 'package:social_media/provider/provider.dart';
+import 'package:social_media/utils/unfocus_textfield.dart';
 
 import 'components/components.dart';
 
@@ -13,21 +14,27 @@ class HomePage extends StatelessWidget {
     // получаем список постов из провайдера
     final posts = context.watch<PostsProvider>().posts;
 
-    return Scaffold(
-      appBar: appBar(context),
-      drawer: MyDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(25.0),
-        child: Column(
-          children: [
-            // посты
-            Expanded(child: Posts(posts)),
+    return GestureDetector(
+      onTap: () {
+        // убираем клавиатуру при нажатии на экран
+        unfocusTextField(context);
+      },
+      child: Scaffold(
+        appBar: appBar(context),
+        drawer: MyDrawer(),
+        body: Padding(
+          padding: EdgeInsets.all(25.0),
+          child: Column(
+            children: [
+              // посты
+              Expanded(child: Posts(posts)),
 
-            SizedBox(height: 20),
+              SizedBox(height: 20),
 
-            // текстовое поле для создания поста
-            NewPostWrapper(),
-          ],
+              // текстовое поле для создания поста
+              NewPostWrapper(),
+            ],
+          ),
         ),
       ),
     );
