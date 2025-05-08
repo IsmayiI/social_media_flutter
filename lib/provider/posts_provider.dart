@@ -75,6 +75,21 @@ class PostsProvider extends ChangeNotifier {
     postController.clear();
   }
 
+  // метод для обновления имени в постах
+  Future<void> updateNameToPosts(
+    String name,
+    String uid,
+  ) async {
+    final postsSnapshot = await FirebaseFirestore.instance
+        .collection('posts')
+        .where('uid', isEqualTo: uid)
+        .get();
+
+    for (final doc in postsSnapshot.docs) {
+      await doc.reference.update({'name': name});
+    }
+  }
+
   @override
   void dispose() {
     // отписываемся от обновлений Firestore
