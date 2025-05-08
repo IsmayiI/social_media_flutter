@@ -11,7 +11,8 @@ class PostsProvider extends ChangeNotifier {
   List<QueryDocumentSnapshot<Map<String, dynamic>>> posts = [];
   List<QueryDocumentSnapshot<Map<String, dynamic>>> userPosts = [];
 
-  late final StreamSubscription _subscription;
+  late final StreamSubscription _subscriptionPosts;
+  StreamSubscription? _subscriptionUserPosts;
 
   PostsProvider() {
     // обновляем состояние при изменении постов
@@ -20,7 +21,7 @@ class PostsProvider extends ChangeNotifier {
 
   // метод для получения постов из Firestore
   void _listenToPostsChanges() {
-    _subscription = FirebaseFirestore.instance
+    _subscriptionPosts = FirebaseFirestore.instance
         .collection('posts')
         .orderBy('createdAt', descending: true)
         .snapshots()
@@ -31,15 +32,19 @@ class PostsProvider extends ChangeNotifier {
   }
 
   // метод для получение постов конкретного пользователя
-  Future<void> getUserPosts(String uid) async {
-    final postsSnapshot = await FirebaseFirestore.instance
+  void listenToUserPostsChanges(String uid) {
+    // отписываемся от предыдущего подписчика, если он существует
+    _subscriptionUserPosts?.cancel();
+
+    _subscriptionUserPosts = FirebaseFirestore.instance
         .collection('posts')
         .where('uid', isEqualTo: uid)
         .orderBy('createdAt', descending: true)
-        .get();
-
-    userPosts = postsSnapshot.docs;
-    notifyListeners();
+        .snapshots()
+        .listen((snapshot) {
+      userPosts = snapshot.docs;
+      notifyListeners();
+    });
   }
 
   // метод для обновления количества лайков
@@ -73,7 +78,8 @@ class PostsProvider extends ChangeNotifier {
   @override
   void dispose() {
     // отписываемся от обновлений Firestore
-    _subscription.cancel();
+    _subscriptionPosts.cancel();
+    _subscriptionUserPosts?.cancel();
     // очищаем контроллер
     postController.dispose();
     super.dispose();

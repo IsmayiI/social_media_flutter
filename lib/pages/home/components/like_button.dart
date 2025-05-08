@@ -5,54 +5,26 @@ import 'package:social_media/pages/home/utils/utils.dart';
 import 'package:social_media/provider/provider.dart';
 import 'package:social_media/theme/colors.dart';
 
-class LikeButton extends StatefulWidget {
+class LikeButton extends StatelessWidget {
   final QueryDocumentSnapshot<Map<String, dynamic>> post;
   const LikeButton(this.post, {super.key});
 
   @override
-  State<LikeButton> createState() => _LikeButtonState();
-}
-
-class _LikeButtonState extends State<LikeButton> {
-  bool isLiking = false;
-  late bool isLiked;
-  late final String? uid;
-  late final List<String> likes;
-
-  @override
-  void initState() {
-    super.initState();
-
+  Widget build(BuildContext context) {
     // получаем uid пользователя
-    uid = context.read<UserProvider>().uid;
+    final uid = context.read<UserProvider>().uid;
 
-    likes = List<String>.from(widget.post['likes']);
+    final likes = List<String>.from(post['likes']);
 
     // проверяем, есть ли лайк от текущего пользователя
-    isLiked = likes.contains(uid);
-  }
+    final isLiked = likes.contains(uid);
 
-  // метод переключения лайка
-  void onPressed() async {
-    if (isLiking) return;
-    isLiking = true;
-
-    setState(() {
-      isLiked = !isLiked;
-    });
-    await toggleLike(context, widget.post.id, uid);
-
-    isLiking = false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // кнопка "лайк"
         IconButton(
-          onPressed: onPressed,
+          onPressed: () => toggleLike(context, post.id, uid),
           icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border),
           color: isLiked ? Colors.red : AppColors.grey500,
           style: IconButton.styleFrom(
@@ -64,7 +36,7 @@ class _LikeButtonState extends State<LikeButton> {
 
         // количество лайков
         Text(
-          isLiked ? '1' : '0',
+          likes.length.toString(),
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,

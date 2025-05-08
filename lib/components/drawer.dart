@@ -10,7 +10,8 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // логика получения постов конкретного пользователя при клике на "Profile"
-    final getUserPosts = context.read<PostsProvider>().getUserPosts;
+    final listenToUserPosts =
+        context.read<PostsProvider>().listenToUserPostsChanges;
     final uid = context.read<AuthProvider>().user?.uid;
 
     return Drawer(
@@ -42,7 +43,7 @@ class MyDrawer extends StatelessWidget {
               const Icon(Icons.person),
               'Profile',
               () {
-                if (uid != null) getUserPosts(uid);
+                if (uid != null) listenToUserPosts(uid);
                 goToProfilePage(context);
               },
             ),
