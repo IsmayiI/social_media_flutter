@@ -10,6 +10,10 @@ class Post extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final name = post['name'] as String;
+    final text = post['text'] as String;
+    final date = post['createdAt'].toDate().toString().substring(0, 10);
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
@@ -25,14 +29,14 @@ class Post extends StatelessWidget {
 
           const SizedBox(width: 10),
 
-          // текст поста и имейл пользователя
+          // текст поста и имя пользователя, дата поста
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // текст поста
                 Text(
-                  post['text'],
+                  text,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -40,19 +44,40 @@ class Post extends StatelessWidget {
                   ),
                 ),
 
-                // имейл пользователя
-                Text(
-                  post['name'],
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey500,
-                  ),
+                const SizedBox(height: 5),
+
+                // имя пользователя, дата поста
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // имя пользователя
+                    _SubText(name),
+
+                    // дата поста
+                    _SubText(date),
+                  ],
                 ),
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SubText extends StatelessWidget {
+  final String text;
+  const _SubText(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: AppColors.grey500,
       ),
     );
   }
