@@ -8,5 +8,19 @@ AppBar appBar(BuildContext context) {
 
   final name = user?['name'] ?? 'User';
 
-  return AppBar(title: Text('$name\'s feed'));
+  final themeProvider = context.watch<ThemeProvider>();
+
+  final icon = themeProvider.isDarkMode
+      ? const Icon(Icons.sunny)
+      : const Icon(Icons.nightlight_round);
+
+  return AppBar(
+    title: Text('$name\'s feed'),
+    actions: [
+      IconButton(
+        icon: icon,
+        onPressed: () => themeProvider.toggleTheme(),
+      ),
+    ],
+  );
 }

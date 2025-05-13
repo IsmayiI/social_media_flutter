@@ -19,11 +19,12 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     // общий стиль для текстовых полей
     final border = OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(
-        color: Colors.white,
+      borderSide: BorderSide(
+        color: theme.colorScheme.primaryContainer,
       ),
     );
 
@@ -32,9 +33,9 @@ class AppTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
-          color: Colors.grey.shade400,
+          color: theme.colorScheme.secondary,
         ),
-        fillColor: Colors.white,
+        fillColor: theme.colorScheme.primaryContainer,
         filled: true,
         enabledBorder: border,
         focusedBorder: border,

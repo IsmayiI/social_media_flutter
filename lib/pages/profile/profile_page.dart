@@ -74,14 +74,6 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 10),
 
               Expanded(child: Posts(userPosts)),
-
-              // посты пользователя
-              // ListView.builder(
-              //   itemCount: 10,
-              //   itemBuilder: (context, index) {
-              //     return  Post();
-              //   },
-              // ),
             ],
           ),
         ),

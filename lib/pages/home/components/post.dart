@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media/theme/colors.dart';
 
 import 'components.dart';
 
@@ -17,7 +16,7 @@ class Post extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(10),
       ),
 
@@ -37,10 +36,10 @@ class Post extends StatelessWidget {
                 // текст поста
                 Text(
                   text,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.grey900,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
 
@@ -74,10 +73,10 @@ class _SubText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
-        color: AppColors.grey500,
+        color: Theme.of(context).colorScheme.secondary,
       ),
     );
   }

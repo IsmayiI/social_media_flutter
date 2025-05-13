@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/components/components.dart';
 import 'package:social_media/provider/provider.dart';
-import 'package:social_media/theme/colors.dart';
 
 import 'components.dart';
 
@@ -16,7 +15,7 @@ class NewPostWrapper extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.grey900,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

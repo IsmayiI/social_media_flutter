@@ -12,7 +12,19 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MainApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ThemeProvider()),
+      ChangeNotifierProvider(create: (_) => PostsProvider()),
+      ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
+        create: (_) => UserProvider(),
+        update: (_, authProvider, userProvider) =>
+            userProvider!..updateWithAuth(authProvider),
+      ),
+    ],
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
@@ -20,22 +32,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => PostsProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProxyProvider<AuthProvider, UserProvider>(
-          create: (_) => UserProvider(),
-          update: (_, authProvider, userProvider) =>
-              userProvider!..updateWithAuth(authProvider),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: theme,
-        routes: Navigation.routes,
-        initialRoute: Navigation.initialRoute,
-      ),
+    // получаем тему
+    final isDarkMode = context.watch<ThemeProvider>().isDarkMode;
+    final themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: themeMode,
+      routes: Navigation.routes,
+      initialRoute: Navigation.initialRoute,
     );
   }
 }

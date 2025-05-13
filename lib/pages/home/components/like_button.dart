@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/pages/home/utils/utils.dart';
 import 'package:social_media/provider/provider.dart';
-import 'package:social_media/theme/colors.dart';
 
 class LikeButton extends StatelessWidget {
   final QueryDocumentSnapshot<Map<String, dynamic>> post;
@@ -26,7 +25,7 @@ class LikeButton extends StatelessWidget {
         IconButton(
           onPressed: () => toggleLike(context, post.id, uid),
           icon: Icon(isLiked ? Icons.favorite : Icons.favorite_border),
-          color: isLiked ? Colors.red : AppColors.grey500,
+          color: isLiked ? Colors.red : Theme.of(context).colorScheme.secondary,
           style: IconButton.styleFrom(
             padding: EdgeInsets.zero,
             minimumSize: Size(30, 30),
@@ -37,10 +36,10 @@ class LikeButton extends StatelessWidget {
         // количество лайков
         Text(
           likes.length.toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: AppColors.grey900,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:social_media/components/components.dart';
 import 'package:social_media/pages/profile/utils/utils.dart';
-import 'package:social_media/theme/colors.dart';
 
 class SettingsDialog extends StatelessWidget {
   final String title;
@@ -11,9 +10,11 @@ class SettingsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = TextEditingController();
 
+    final theme = Theme.of(context).colorScheme;
+
     return AlertDialog(
       // стиль
-      backgroundColor: AppColors.grey300,
+      backgroundColor: theme.outline,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -22,7 +23,7 @@ class SettingsDialog extends StatelessWidget {
       title: Text(
         'Edit $title',
         style: TextStyle(
-          color: AppColors.grey600,
+          color: theme.surface,
           fontSize: 16,
         ),
       ),
@@ -62,14 +63,16 @@ class _TextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        overlayColor: AppColors.grey900,
+        overlayColor: theme.primary,
       ),
       child: Text(
         text,
-        style: TextStyle(color: AppColors.grey600),
+        style: TextStyle(color: theme.surface),
       ),
     );
   }

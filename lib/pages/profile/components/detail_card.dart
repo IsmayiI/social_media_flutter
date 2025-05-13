@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/provider/provider.dart';
-import 'package:social_media/theme/colors.dart';
 
 import 'components.dart';
 
@@ -16,10 +15,12 @@ class DetailCard extends StatelessWidget {
     // получаем значение name или bio в зависимости от title
     final value = user?[title] ?? 'empty..';
 
+    final theme = Theme.of(context).colorScheme;
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
 
@@ -35,7 +36,7 @@ class DetailCard extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  color: AppColors.grey500,
+                  color: theme.secondary,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -50,7 +51,7 @@ class DetailCard extends StatelessWidget {
           // кнопка редактирования
           IconButton(
             icon: const Icon(Icons.settings),
-            color: AppColors.grey500,
+            color: theme.secondary,
             onPressed: () {
               showDialog(
                 context: context,

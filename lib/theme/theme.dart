@@ -1,15 +1,3 @@
-import 'package:flutter/material.dart';
-
-import 'colors.dart';
-
-final theme = ThemeData(
-  scaffoldBackgroundColor: AppColors.grey300,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: AppColors.grey900,
-    foregroundColor: Colors.white,
-    centerTitle: true,
-  ),
-  drawerTheme: const DrawerThemeData(
-    backgroundColor: AppColors.grey300,
-  ),
-);
+export 'light_theme.dart';
+export 'dark_theme.dart';
+export 'colors.dart';
