@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:social_media/theme/colors.dart';
 
 class AuthRichText extends StatelessWidget {
   final void Function() onTap;
@@ -18,8 +17,8 @@ class AuthRichText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: questionText,
-        style: const TextStyle(
-          color: AppColors.grey600,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.surface,
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:social_media/theme/colors.dart';
 
 class AuthButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -16,15 +15,15 @@ class AuthButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.infinity, 56),
-        backgroundColor: AppColors.grey900,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.primaryContainer,
           fontSize: 16,
           fontWeight: FontWeight.w600,
         ),

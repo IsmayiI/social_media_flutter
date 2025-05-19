@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:social_media/theme/colors.dart';
 
 class WelcomeText extends StatelessWidget {
   final String text;
@@ -9,10 +8,10 @@ class WelcomeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: AppColors.grey600,
+        color: Theme.of(context).colorScheme.surface,
       ),
     );
   }
