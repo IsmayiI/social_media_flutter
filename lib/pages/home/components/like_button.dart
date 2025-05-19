@@ -28,7 +28,7 @@ class LikeButton extends StatelessWidget {
           color: isLiked ? Colors.red : Theme.of(context).colorScheme.secondary,
           style: IconButton.styleFrom(
             padding: EdgeInsets.zero,
-            minimumSize: Size(30, 30),
+            minimumSize: const Size(30, 30),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),

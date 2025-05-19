@@ -23,7 +23,7 @@ void main() async {
             userProvider!..updateWithAuth(authProvider),
       ),
     ],
-    child: MainApp(),
+    child: const MainApp(),
   ));
 }
 

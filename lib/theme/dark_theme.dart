@@ -13,7 +13,7 @@ final darkTheme = ThemeData(
   drawerTheme: const DrawerThemeData(
     backgroundColor: AppColors.grey900,
   ),
-  colorScheme: ColorScheme.dark(
+  colorScheme: const ColorScheme.dark(
     primary: AppColors.grey100,
     secondary: AppColors.grey500,
     primaryContainer: AppColors.grey800,

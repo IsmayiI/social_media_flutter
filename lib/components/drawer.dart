@@ -23,8 +23,8 @@ class MyDrawer extends StatelessWidget {
         child: Column(
           children: [
             // лого
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
               child: Icon(
                 Icons.person,
                 size: 100,
@@ -81,7 +81,7 @@ class _DrawerTile extends StatelessWidget {
       leading: icon,
       title: Text(
         title.toUpperCase(),
-        style: TextStyle(
+        style: const TextStyle(
           letterSpacing: 4,
           fontSize: 14,
         ),

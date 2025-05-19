@@ -27,8 +27,8 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             children: [
               // аватарка
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
+              const Padding(
+                padding: EdgeInsets.only(top: 50),
                 child: Icon(Icons.person, size: 100),
               ),
 
@@ -37,14 +37,14 @@ class ProfilePage extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Text(
                   email,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
 
               // детали
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: const Text(
+                child: Text(
                   'Details',
                   style: TextStyle(fontSize: 18),
                 ),
@@ -53,19 +53,19 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 10),
 
               // имя
-              DetailCard('name'),
+              const DetailCard('name'),
 
               const SizedBox(height: 20),
 
               // био
-              DetailCard('bio'),
+              const DetailCard('bio'),
 
               const SizedBox(height: 20),
 
               // посты
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: const Text(
+                child: Text(
                   'Posts',
                   style: TextStyle(fontSize: 18),
                 ),

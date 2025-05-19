@@ -21,18 +21,18 @@ class HomePage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: appBar(context),
-        drawer: MyDrawer(),
+        drawer: const MyDrawer(),
         body: Padding(
-          padding: EdgeInsets.all(25.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
               // посты
               Expanded(child: Posts(posts)),
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // текстовое поле для создания поста
-              NewPostWrapper(),
+              const NewPostWrapper(),
             ],
           ),
         ),

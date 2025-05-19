@@ -13,7 +13,7 @@ final lightTheme = ThemeData(
     drawerTheme: const DrawerThemeData(
       backgroundColor: AppColors.grey300,
     ),
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.grey900,
       secondary: AppColors.grey400,
       primaryContainer: Colors.white,
