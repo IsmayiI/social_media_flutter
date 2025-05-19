@@ -90,6 +90,15 @@ class PostsProvider extends ChangeNotifier {
     }
   }
 
+  // метод для удаления поста
+  Future<void> deletePost(String postId) async {
+    // получаем ссылку на пост
+    final postRef = FirebaseFirestore.instance.collection('posts').doc(postId);
+
+    // удаляем пост из Firestore
+    await postRef.delete();
+  }
+
   @override
   void dispose() {
     // отписываемся от обновлений Firestore

@@ -33,19 +33,30 @@ class Post extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // текст поста
-                Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                // строка (текст поста | кнопка удаления поста)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // текст поста
+                    Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+
+                    const SizedBox(width: 10),
+
+                    // кнопка удаления поста
+                    DeleteButton(post),
+                  ],
                 ),
 
-                const SizedBox(height: 5),
+                const SizedBox(height: 8),
 
-                // имя пользователя, дата поста
+                // строка (имя пользователя | дата поста)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
