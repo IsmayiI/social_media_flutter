@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // получаем список постов из провайдера
+    // получаем посты
     final posts = context.watch<PostsProvider>().posts;
 
     return GestureDetector(

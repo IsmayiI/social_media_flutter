@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:social_media/provider/provider.dart';
 import 'package:social_media/utils/unfocus_textfield.dart';
 
 import 'components.dart';
@@ -10,6 +12,17 @@ class Posts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // получаем состояние загрузки постов
+    final postsIsLoading = context.watch<PostsProvider>().postsIsLoading;
+
+    // если посты загружаются, показываем индикатор загрузки
+    if (postsIsLoading) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      );
+    }
     // если список постов пустой, показываем индикатор загрузки
     if (posts.isEmpty) {
       return const Center(child: Text('Posts are empty'));

@@ -7,6 +7,8 @@ class PostsProvider extends ChangeNotifier {
   // контроллер для текстового поля
   final postController = TextEditingController();
 
+  bool postsIsLoading = false;
+
   // список постов
   List<QueryDocumentSnapshot<Map<String, dynamic>>> posts = [];
   List<QueryDocumentSnapshot<Map<String, dynamic>>> userPosts = [];
@@ -21,12 +23,16 @@ class PostsProvider extends ChangeNotifier {
 
   // метод для получения постов из Firestore
   void _listenToPostsChanges() {
+    postsIsLoading = true;
+    notifyListeners();
+
     _subscriptionPosts = FirebaseFirestore.instance
         .collection('posts')
         .orderBy('createdAt', descending: true)
         .snapshots()
         .listen((snapshot) {
       posts = snapshot.docs;
+      postsIsLoading = false;
       notifyListeners();
     });
   }
