@@ -26,7 +26,8 @@ class NewPostWrapper extends StatelessWidget {
               hintText: 'Write something...',
               controller: postController,
               textInputAction: TextInputAction.newline,
-              maxLines: null,
+              maxLines: 3,
+              maxLength: 87,
             ),
           ),
 

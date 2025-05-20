@@ -28,7 +28,9 @@ class Post extends StatelessWidget {
 
           const SizedBox(width: 10),
 
-          // текст поста и имя пользователя, дата поста
+          // колонка
+          // (текст поста | кнопка удаления поста)
+          // (имя пользователя | дата поста)
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,12 +40,14 @@ class Post extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // текст поста
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).colorScheme.primary,
+                    Expanded(
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                     ),
 
@@ -61,7 +65,9 @@ class Post extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // имя пользователя
-                    _SubText(name),
+                    Expanded(child: _SubText(name)),
+
+                    const SizedBox(width: 50),
 
                     // дата поста
                     _SubText(date),

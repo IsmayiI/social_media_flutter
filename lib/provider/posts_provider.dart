@@ -60,7 +60,11 @@ class PostsProvider extends ChangeNotifier {
   // метод для создания поста
   Future<void> addPost(String name, String uid) async {
     // проверяем, что текстовое поле не пустое
-    if (postController.text.isEmpty) return;
+    if (postController.text.trim().isEmpty) {
+      // очищаем текстовое поле
+      postController.clear();
+      return;
+    }
 
     // добавляем пост в Firestore
     await FirebaseFirestore.instance.collection('posts').add({

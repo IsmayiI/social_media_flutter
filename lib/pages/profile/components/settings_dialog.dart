@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:social_media/components/components.dart';
 import 'package:social_media/pages/profile/utils/utils.dart';
+import 'package:social_media/provider/provider.dart';
 
 class SettingsDialog extends StatelessWidget {
   final String title;
@@ -8,7 +10,12 @@ class SettingsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
+    final user = context.watch<UserProvider>().user;
+
+    // получаем значение name или bio в зависимости от title
+    final value = user?[title] ?? 'empty..';
+
+    final controller = TextEditingController(text: value);
 
     final theme = Theme.of(context).colorScheme;
 
@@ -32,6 +39,7 @@ class SettingsDialog extends StatelessWidget {
       content: AppTextField(
         hintText: 'enter new $title',
         controller: controller,
+        maxLength: 30,
       ),
 
       // кнопки

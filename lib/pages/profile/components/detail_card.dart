@@ -44,7 +44,9 @@ class DetailCard extends StatelessWidget {
               const SizedBox(height: 5),
 
               // значение
-              Text(value),
+              Text(
+                value,
+              ),
             ],
           ),
 
