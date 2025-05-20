@@ -11,7 +11,7 @@ class AddPostButton extends StatelessWidget {
       icon: const Icon(Icons.send),
       style: IconButton.styleFrom(
         foregroundColor: Theme.of(context).colorScheme.primaryContainer,
-        minimumSize: const Size(56, 56),
+        minimumSize: const Size(56, 0),
       ),
     );
   }
