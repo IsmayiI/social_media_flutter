@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/pages/home/components/components.dart';
 import 'package:social_media/provider/provider.dart';
+import 'package:social_media/responsive/responsive_center_box.dart';
 
 import 'components/components.dart';
 
@@ -20,8 +21,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: SizedBox(
-        width: double.infinity,
+      body: ResponsiveCenterBox(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(

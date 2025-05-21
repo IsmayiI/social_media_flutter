@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:social_media/components/components.dart';
 import 'package:social_media/navigation/routes.dart';
+import 'package:social_media/responsive/responsive_center_box.dart';
 
 import 'components/components.dart';
 import 'utils/utils.dart';
@@ -15,57 +16,59 @@ class LoginPage extends StatelessWidget {
     final passwordController = TextEditingController();
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // иконка
-            const AuthIcon(),
+      body: ResponsiveCenterBox(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // иконка
+              const AuthIcon(),
 
-            const SizedBox(height: 50),
+              const SizedBox(height: 50),
 
-            // текст приветсвия
-            const WelcomeText('Welcome back, you\'ve been missed!'),
+              // текст приветсвия
+              const WelcomeText('Welcome back, you\'ve been missed!'),
 
-            const SizedBox(height: 25),
+              const SizedBox(height: 25),
 
-            // текстовые поля
-            AppTextField(
-              hintText: 'Email',
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-            ),
-
-            const SizedBox(height: 10),
-
-            AppTextField(
-              hintText: 'Password',
-              controller: passwordController,
-              obscureText: true,
-            ),
-
-            const SizedBox(height: 25),
-
-            // кнопка входа
-            AuthButton(
-              text: 'Sign In',
-              onPressed: () => signIn(
-                context,
-                emailController,
-                passwordController,
+              // текстовые поля
+              AppTextField(
+                hintText: 'Email',
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
               ),
-            ),
 
-            const SizedBox(height: 25),
+              const SizedBox(height: 10),
 
-            // переход на страницу регистрации
-            AuthRichText(
-              questionText: 'Don\'t have an account?',
-              text: 'Register now',
-              onTap: () => goToRegisterPage(context),
-            ),
-          ],
+              AppTextField(
+                hintText: 'Password',
+                controller: passwordController,
+                obscureText: true,
+              ),
+
+              const SizedBox(height: 25),
+
+              // кнопка входа
+              AuthButton(
+                text: 'Sign In',
+                onPressed: () => signIn(
+                  context,
+                  emailController,
+                  passwordController,
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // переход на страницу регистрации
+              AuthRichText(
+                questionText: 'Don\'t have an account?',
+                text: 'Register now',
+                onTap: () => goToRegisterPage(context),
+              ),
+            ],
+          ),
         ),
       ),
     );

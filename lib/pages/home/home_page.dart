@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media/components/drawer.dart';
 import 'package:social_media/provider/provider.dart';
+import 'package:social_media/responsive/responsive_center_box.dart';
 import 'package:social_media/utils/unfocus_textfield.dart';
 
 import 'components/components.dart';
@@ -22,18 +23,20 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: appBar(context),
         drawer: const MyDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            children: [
-              // посты
-              Expanded(child: Posts(posts)),
+        body: ResponsiveCenterBox(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              children: [
+                // посты
+                Expanded(child: Posts(posts)),
 
-              const SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-              // текстовое поле для создания поста
-              const NewPostWrapper(),
-            ],
+                // текстовое поле для создания поста
+                const NewPostWrapper(),
+              ],
+            ),
           ),
         ),
       ),
